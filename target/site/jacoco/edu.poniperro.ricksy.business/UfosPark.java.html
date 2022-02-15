@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UfosPark.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Ricksy_Business</a> &gt; <a href="index.source.html" class="el_package">edu.poniperro.ricksy.business</a> &gt; <span class="el_source">UfosPark.java</span></div><h1>UfosPark.java</h1><pre class="source lang-java linenums">package edu.poniperro.ricksy.business;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class UfosPark {
+
+    //atributos
+<span class="nc" id="L10">    private float fee = 500;</span>
+    private Map&lt;String, String&gt; flota;
+
+    //setters y getters
+
+    public String getOvni(int pos) {
+<span class="nc" id="L16">        return flota.get(pos);</span>
+    }
+
+    public int getNumeroOvnis(){
+<span class="nc" id="L20">        return flota.size();</span>
+    }
+
+    // constructor
+<span class="nc" id="L24">    public UfosPark(){</span>
+<span class="nc" id="L25">    flota =new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L26">    }</span>
+
+    //método para añadir ovnis a ala flota de ovnis
+    public void add(String ovni){
+<span class="nc" id="L30">        flota.put(ovni,&quot;0&quot;);</span>
+<span class="nc" id="L31">    }</span>
+
+
+    // 2n Método: para cobrar y asignar un ovnia al cliente.
+    public void dispatch(CreditCard creditCard) {
+        //vamos a de declarar dos variables para hacer la búsqueda de los ufos id dentro del map de flota
+        String clave, valor;
+<span class="nc" id="L38">        boolean tieneOvni = false;</span>
+        //si con la tarjeta  de  credito se puede pagar  500 EZIS, entonces le asignamos un ovni
+<span class="nc" id="L40">        String ovni = getUfoOf(creditCard.number());</span>
+        //si el valor es null, significa que  a esa tarjeta de credito nose ha asignasdo un ovni.
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (ovni == null) {</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (creditCard.pay(fee) == true) {</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">                for (Map.Entry&lt;String, String&gt; elemento : flota.entrySet()) {</span>
+<span class="nc" id="L45">                    clave = elemento.getKey();</span>
+<span class="nc" id="L46">                    valor = elemento.getValue();</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                    if (valor == &quot;0&quot;) {</span>
+<span class="nc" id="L48">                        flota.put(clave, creditCard.number());</span>
+<span class="nc" id="L49">                        tieneOvni = true;</span>
+<span class="nc" id="L50">                        break;</span>
+                    }
+<span class="nc" id="L52">                }</span>
+                // Si no tiene un ovni
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                if(tieneOvni==false){</span>
+<span class="nc" id="L55">                    creditCard.setCredit(3000);</span>
+                }
+            }
+        }
+<span class="nc" id="L59">    }</span>
+
+    //3r Método: la entrada de este método es un número de la tarjeta de crédito.
+    // y devolvemos el ovni asignado a la tarjeta  de crédito.
+    public String getUfoOf(String numCreditCard){
+        //declaramos las 3 variables siguientes:
+<span class="nc" id="L65">        String clave, valor, claveEncontrada =null;</span>
+
+        //recorremos el diccionario
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        for(Map.Entry&lt;String, String&gt; elemento : flota.entrySet()){</span>
+<span class="nc" id="L69">            clave = elemento.getKey();</span>
+<span class="nc" id="L70">            valor = elemento.getValue();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">            if(valor==numCreditCard) {</span>
+<span class="nc" id="L72">                claveEncontrada = clave;</span>
+<span class="nc" id="L73">                break;</span>
+            }
+<span class="nc" id="L75">        }</span>
+<span class="nc" id="L76">        return claveEncontrada;</span>
+
+    }
+
+    @Override
+    public String toString(){
+<span class="nc" id="L82">    return fee + &quot;EZI&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
