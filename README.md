@@ -62,4 +62,8 @@ Las historias de usuario están enunciadas en el script principal `RicksyBusines
 Sigue el diagrama de clase UML proporcionado para construir la aplicación.
 Si añades algún componente, dibújalo a mano alzada sobre el diagrama.
 
+!["Diagrama de clases UML"](./diagramaClaseTapado.png)
+
+*El mismo diagrama con los paquetes y la visibilidad al descubierto:*
+
 !["Diagrama de clases UML"](./diagrama_clase_UML.png)
